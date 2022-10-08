@@ -10,21 +10,11 @@ void setup() {
   Serial.begin(115200);
   pinMode(ledPin, OUTPUT);
 
-  OneButton b = OneButton(21,true,true);
-  OneButton b1 = OneButton(20,true,true);
-  OneButton b2 = OneButton(19,true,true);
-  OneButton b3 = OneButton(18,true,true);
-  OneButton b4 = OneButton(15,true,true);
-
-
-  buttons[0] = b;
-  buttons[1] = b1;
-  buttons[2] = b2;
-  buttons[3] = b3;
-  buttons[4] = b4;
 
   for (int i = 0; i < nbrButtons; i++) {
-      buttons[i].attachClick([](){
+    buttons[i] = OneButton(Pins[i],true,true);
+
+    buttons[i].attachClick([](){
       Serial.println("b pressed!");
       digitalWrite(ledPin, HIGH);
       delay(50);
