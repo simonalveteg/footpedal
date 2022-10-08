@@ -7,7 +7,7 @@ OneButton buttons[nbrButtons];
 
 void singlePress(void *s) {
   Serial.print("Button ");
-  Serial.print((char *)s);
+  Serial.print((int)s);
   Serial.println(" pressed!");
 }
 
@@ -15,7 +15,6 @@ void setup() {
   Serial.begin(115200);
 
   for (int i = 0; i < nbrButtons; i++) {
-    int s = i;
     buttons[i] = OneButton(Pins[i],true,true);
     buttons[i].attachClick(singlePress, i);
   }
