@@ -6,9 +6,11 @@ const int Pins[nbrButtons] = {6,7,8,9,10,16,14,15,18,19,20,21}; // array of pins
 OneButton buttons[nbrButtons];
 
 void singlePress(void *s) {
-  Serial.print("Button ");
-  Serial.print((int)s);
-  Serial.println(" pressed!");
+  Serial.println("Button " + (String)(int)s + " pressed!");
+}
+
+void longPress(void *s) {
+  Serial.println("Button " + (String)(int)s + " longpressed!");
 }
 
 void setup() {
@@ -17,6 +19,8 @@ void setup() {
   for (int i = 0; i < nbrButtons; i++) {
     buttons[i] = OneButton(Pins[i],true,true);
     buttons[i].attachClick(singlePress, i);
+    buttons[i].setPressTicks(300);
+    buttons[i].attachLongPressStop(longPress, i);
   }
 }
 
